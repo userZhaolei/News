@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <ImageView
+        android:id="@+id/title_newsName_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/big_loadpic_empty_listpage"
+        android:padding="15dp"
+        android:background="@color/color_Main_title_bg"
+        />
+    <ImageView
+        android:id="@+id/title_leftdrawer"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/default_user_leftdrawer"
+        android:padding="10dp"
+        />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/discover_tabbar_normal"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"/>
+    <android.support.design.widget.TabLayout
+        android:layout_below="@id/title_newsName_image"
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="#f00"
+        app:tabIndicatorHeight="0dp"
+        android:background="#EEEEEE"></android.support.design.widget.TabLayout>
+    <android.support.v4.view.ViewPager
+        android:layout_below="@id/tabLayout"
+        android:id="@+id/title_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+
+    </RelativeLayout>

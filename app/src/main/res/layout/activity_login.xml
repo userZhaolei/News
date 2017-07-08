@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.a3559dell.headlinestoday_demo.activity.LoginActivity">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+       android:layout_centerInParent="true">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/account_icon_qzone"
+            android:padding="5dp"/>
+        <Button
+            android:id="@+id/qqBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="腾讯QQ"
+            android:background="#fff"/>
+
+    </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/account_icon_tencent"
+                android:padding="5dp"/>
+            <Button
+                android:id="@+id/tenxunButton"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="腾讯微博"
+                android:background="#fff"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/account_icon_weibo"
+                android:padding="5dp"/>
+            <Button
+                android:id="@+id/weiboButton"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="新浪微博"
+                android:background="#fff"/>
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

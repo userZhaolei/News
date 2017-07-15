@@ -22,7 +22,7 @@ public class UmengUtils {
     public void doUMShareAPI(SHARE_MEDIA share_media){
         MyApplication application = (MyApplication) activity.getApplication();
         UMShareAPI umShareAPI = application.getmUMShareAPI();
-         umShareAPI.doOauthVerify(activity, share_media, new UMAuthListener() {
+         umShareAPI.getPlatformInfo(activity, share_media, new UMAuthListener() {
              @Override
              public void onStart(SHARE_MEDIA share_media) {
 
@@ -30,17 +30,17 @@ public class UmengUtils {
 
              @Override
              public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-                 Toast.makeText(activity,"成功",Toast.LENGTH_LONG).show();
+                 Toast.makeText(activity, "成功", Toast.LENGTH_SHORT).show();
              }
 
              @Override
              public void onError(SHARE_MEDIA share_media, int i, Throwable throwable) {
-                 Toast.makeText(activity,"错误",Toast.LENGTH_LONG).show();
+
              }
 
              @Override
              public void onCancel(SHARE_MEDIA share_media, int i) {
-                 Toast.makeText(activity,"取消",Toast.LENGTH_LONG).show();
+                 Toast.makeText(activity, "失败", Toast.LENGTH_SHORT).show();
              }
          });
     }

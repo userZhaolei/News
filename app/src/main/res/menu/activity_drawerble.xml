@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <item
+            android:id="@+id/home1"
+            android:title="home"
+            android:icon="@mipmap/ic_launcher"/>
+        <item
+            android:id="@+id/home2"
+            android:title="home"
+            android:icon="@mipmap/ic_launcher"/>
+        <item
+            android:id="@+id/home3"
+            android:title="home"
+            android:icon="@mipmap/ic_launcher"/>
+        <item
+            android:id="@+id/home4"
+            android:title="home"
+            android:icon="@mipmap/ic_launcher"/>
+
+    </group>
+    <item android:title="sunnny">
+        <menu>
+            <item
+                android:id="@+id/sun1"
+                android:title="sun1"
+                android:icon="@mipmap/ic_launcher"></item>
+            <item
+                android:id="@+id/sun2"
+                android:title="sun2"
+                android:icon="@mipmap/ic_launcher"></item>
+        </menu>
+    </item>
+
+</menu>

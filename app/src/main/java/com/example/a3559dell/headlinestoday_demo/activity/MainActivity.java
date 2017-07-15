@@ -2,12 +2,15 @@ package com.example.a3559dell.headlinestoday_demo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -35,16 +38,19 @@ public class MainActivity extends AppCompatActivity{
 
     @ViewInject(R.id.title_vp)
     private ViewPager vp;
-    @ViewInject(R.id.loginButton)
     private Button loginButton;
+    @ViewInject(R.id.navigation)
+    private NavigationView navigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         x.view().inject(this);
-       OnClik();
+
+        View headerView = navigationView.getHeaderView(0);
+        loginButton = (Button) headerView.findViewById(R.id.loginButton);
+
+        OnClik();
         setTabBar();
-
-
     }
 
     private void setTabBar() {
@@ -76,6 +82,14 @@ public class MainActivity extends AppCompatActivity{
              Intent intent = new  Intent(MainActivity.this,LoginActivity.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                item.setCheckable(true);
+                drawerLyout.closeDrawers();
+                return true;
             }
         });
     }

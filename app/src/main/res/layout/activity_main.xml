@@ -9,59 +9,15 @@
         <include
             layout="@layout/title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></include>
-    <RelativeLayout
+            android:layout_height="wrap_content"
+            ></include>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="left">
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:background="#F4F4F5"/>
-        <LinearLayout
-            android:id="@+id/lin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-           >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="40dp">
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:src="@drawable/account_icon_mobile"
-                android:layout_weight="1"
-               />
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="64dp"
-                android:src="@drawable/account_icon_qzone"
-                android:layout_weight="1.07"/>
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="60dp"
-                android:src="@drawable/account_icon_weibo"
-                android:layout_weight="1"
-                />
-        </LinearLayout>
-            <Button
-                android:id="@+id/loginButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="更多登录方式 >"
-                android:background="@drawable/left_button_share"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                />
-        </LinearLayout>
-        <ListView
-            android:layout_below="@id/lin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></ListView>
-
-
-    </RelativeLayout>
+        android:layout_gravity="start"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:headerLayout="@layout/activity_head"
+        app:menu="@menu/activity_drawerble"
+        ></android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

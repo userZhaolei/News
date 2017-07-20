@@ -7,7 +7,6 @@ import com.umeng.socialize.UMShareAPI;
 
 import org.xutils.DbManager;
 import org.xutils.x;
-
 /**
  * Created by 3559dell on 2017/7/7.
  */

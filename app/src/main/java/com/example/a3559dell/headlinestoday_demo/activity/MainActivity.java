@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private List<ChannelBean> tabList;
     private SharedPreferences sp;
-    private List<ChannelBean> tabListAll = new ArrayList<>();
+    private List<String> urlList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +74,14 @@ public class MainActivity extends AppCompatActivity {
         String str = sp.getString(TAB_DATA_KEY, null);
         if(str==null){
             for(int i = 0;i<tabList.size();i++){
-                list.add(new ContentFragment());
+                list.add(new ContentFragment(urlList.get(i)));
             }
         }else{
          List<ChannelBean> listAll= new Gson().fromJson(str, new TypeToken<List<ChannelBean>>() {
             }.getType());
             for(int i = 0;i<listAll.size();i++){
                 if (listAll.get(i).isSelect())
-                list.add(new ContentFragment());
+                list.add(new ContentFragment(urlList.get(i)));
             }
         }
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), list);
@@ -118,6 +118,21 @@ public class MainActivity extends AppCompatActivity {
         tabList.add(new ChannelBean("育儿",false));
         tabList.add(new ChannelBean("体育",false));
         tabList.add(new ChannelBean("购物",false));
+        urlList = new ArrayList<>();
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=war&page=1&limit=30");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=sport&page=1&limit=30");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=tech&page=1&limit=30");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=edu&page=1&limit=30");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=ent&page=1&limit=30");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=money&page=1&limit=30");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=gupiao&page=1&limit=30");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=travel&page=1&limit=30");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=lady&page=1&limit=30");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=war&page=1&limit=30");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=sport&page=1&limit=30");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=tech&page=1&limit=30");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=edu&page=1&limit=30");
+
     }
     private void OnClik() {
         imageleftDrawer.setOnClickListener(new View.OnClickListener() {

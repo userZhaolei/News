@@ -2,6 +2,7 @@ package com.example.a3559dell.headlinestoday_demo.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -59,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         init();
         OnClik();
         setTabBar();
+
+
     }
 
     private void init() {
@@ -119,20 +122,19 @@ public class MainActivity extends AppCompatActivity {
         tabList.add(new ChannelBean("体育",false));
         tabList.add(new ChannelBean("购物",false));
         urlList = new ArrayList<>();
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=war&page=1&limit=30");
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=sport&page=1&limit=30");
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=tech&page=1&limit=30");
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=edu&page=1&limit=30");
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=ent&page=1&limit=30");
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=money&page=1&limit=30");
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=gupiao&page=1&limit=30");
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=travel&page=1&limit=30");
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=lady&page=1&limit=30");
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=war&page=1&limit=30");
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=sport&page=1&limit=30");
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=tech&page=1&limit=30");
-        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=edu&page=1&limit=30");
-
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=war&limit=30&page=");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=sport&limit=30&page=");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=tech&limit=30&page=");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=edu&limit=30&page=");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=ent&limit=30&page=");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=money&limit=30&page=");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=gupiao&limit=30&page=");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=trave&limit=30&page=");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=lady&limit=30&page=");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=war&limit=30&page=");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=sport&limit=30&page=");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=tech&limit=30&page=");
+        urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=edu&limit=30&page=");
     }
     private void OnClik() {
         imageleftDrawer.setOnClickListener(new View.OnClickListener() {
@@ -184,8 +186,21 @@ public class MainActivity extends AppCompatActivity {
                 sp.edit().putString(TAB_DATA_KEY,da).commit();
                 setTabBar();
             }
-
-
         }
     }
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus && Build.VERSION.SDK_INT >= 19) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+    }
+
 }

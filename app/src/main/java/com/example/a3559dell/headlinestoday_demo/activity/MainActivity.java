@@ -2,15 +2,12 @@ package com.example.a3559dell.headlinestoday_demo.activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,13 +25,12 @@ import com.google.gson.reflect.TypeToken;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @ContentView(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     @ViewInject(R.id.title_leftdrawer)
     private ImageView imageleftDrawer;
     @ViewInject(R.id.drawerLayout)
@@ -53,60 +49,9 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sp;
     private List<String> urlList;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        x.view().inject(this);
-        init();
-        OnClik();
-        setTabBar();
-
-
-    }
-
-    private void init() {
-        sp = getSharedPreferences("isJson",MODE_PRIVATE);
-        View headerView = navigationView.getHeaderView(0);
-        loginButton = (Button) headerView.findViewById(R.id.loginButton);
-    }
-
-    private void setTabBar() {
-        initTabData();
-        List<Fragment> list = new ArrayList<>();
-
-        String str = sp.getString(TAB_DATA_KEY, null);
-        if(str==null){
-            for(int i = 0;i<tabList.size();i++){
-                list.add(new ContentFragment(urlList.get(i)));
-            }
-        }else{
-         List<ChannelBean> listAll= new Gson().fromJson(str, new TypeToken<List<ChannelBean>>() {
-            }.getType());
-            for(int i = 0;i<listAll.size();i++){
-                if (listAll.get(i).isSelect())
-                list.add(new ContentFragment(urlList.get(i)));
-            }
-        }
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), list);
-        vp.setAdapter(adapter);
-        tabLayout.setupWithViewPager(vp);
-        if(str==null){
-            for(int i = 0;i<tabList.size();i++){
-                tabLayout.getTabAt(i).setText(tabList.get(i).getName());
-            }
-        }else{
-            List<ChannelBean> listAll= new Gson().fromJson(str, new TypeToken<List<ChannelBean>>() {
-            }.getType());
-            for(int i = 0;i<listAll.size();i++){
-                if(listAll.get(i).isSelect()){
-                    tabLayout.getTabAt(i).setText(listAll.get(i).getName());
-                }
-
-            }
-        }
-    }
-
-    private void initTabData() {
+    public void initData() {
         tabList = new ArrayList<>();
         tabList.add(new ChannelBean("推荐",true));
         tabList.add(new ChannelBean("热点",true));
@@ -136,7 +81,25 @@ public class MainActivity extends AppCompatActivity {
         urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=tech&limit=30&page=");
         urlList.add("http://wangyi.butterfly.mopaasapp.com/news/api?type=edu&limit=30&page=");
     }
-    private void OnClik() {
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null) {
+            if(resultCode==LoginActivity.RESULT_CODE){
+                String url = data.getStringExtra("url");
+                Glide.with(MainActivity.this).load(url).into(imageleftDrawer);
+
+            }else if(requestCode==ChannelActivity.REQUEST_CODE){
+                String da =data.getStringExtra(ChannelActivity.RESULT_JSON_KEY);
+                sp.edit().putString(TAB_DATA_KEY,da).commit();
+                logic();
+            }
+        }
+    }
+
+    @Override
+    public void onClick() {
         imageleftDrawer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -171,35 +134,48 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
-            if(resultCode==LoginActivity.RESULT_CODE){
-                String url = data.getStringExtra("url");
-                Glide.with(MainActivity.this).load(url).into(imageleftDrawer);
 
-            }else if(requestCode==ChannelActivity.REQUEST_CODE){
-                String da =data.getStringExtra(ChannelActivity.RESULT_JSON_KEY);
-                sp.edit().putString(TAB_DATA_KEY,da).commit();
-                setTabBar();
+    @Override
+    public void initView() {
+        sp = getSharedPreferences("isJson",MODE_PRIVATE);
+        View headerView = navigationView.getHeaderView(0);
+        loginButton = (Button) headerView.findViewById(R.id.loginButton);
+    }
+
+    @Override
+    public void logic() {
+        List<Fragment> list = new ArrayList<>();
+
+        String str = sp.getString(TAB_DATA_KEY, null);
+        if(str==null){
+            for(int i = 0;i<tabList.size();i++){
+                list.add(new ContentFragment(urlList.get(i)));
+            }
+        }else{
+            List<ChannelBean> listAll= new Gson().fromJson(str, new TypeToken<List<ChannelBean>>() {
+            }.getType());
+            for(int i = 0;i<listAll.size();i++){
+                if (listAll.get(i).isSelect())
+                    list.add(new ContentFragment(urlList.get(i)));
             }
         }
-    }
-    @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        if (hasFocus && Build.VERSION.SDK_INT >= 19) {
-            View decorView = getWindow().getDecorView();
-            decorView.setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), list);
+        vp.setAdapter(adapter);
+        tabLayout.setupWithViewPager(vp);
+        if(str==null){
+            for(int i = 0;i<tabList.size();i++){
+                tabLayout.getTabAt(i).setText(tabList.get(i).getName());
+            }
+        }else{
+            List<ChannelBean> listAll= new Gson().fromJson(str, new TypeToken<List<ChannelBean>>() {
+            }.getType());
+            for(int i = 0;i<listAll.size();i++){
+                if(listAll.get(i).isSelect()){
+                    tabLayout.getTabAt(i).setText(listAll.get(i).getName());
+                }
+
+            }
         }
     }
 

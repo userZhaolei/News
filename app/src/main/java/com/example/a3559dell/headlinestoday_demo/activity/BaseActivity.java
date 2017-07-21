@@ -11,12 +11,23 @@ import org.xutils.x;
 /**
  * Created by 3559dell on 2017/7/21.
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity  {
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         x.view().inject(this);
+
+        initData();
+        initView();
+        onClick();
+        logic();
+
     }
+    public abstract void onClick();
+    public abstract void initView();
+    public abstract void initData();
+    public abstract void logic();
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);

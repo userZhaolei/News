@@ -2,7 +2,6 @@ package com.example.a3559dell.headlinestoday_demo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,7 +17,7 @@ import org.xutils.x;
 import java.util.Map;
 
 @ContentView(R.layout.activity_login)
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends BaseActivity{
     public  static final int RESULT_CODE = 105;
 
     @ViewInject(R.id.qqBtn)
@@ -101,5 +100,20 @@ public class LoginActivity extends AppCompatActivity{
          });
 
         }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void logic() {
+
+    }
 
 }

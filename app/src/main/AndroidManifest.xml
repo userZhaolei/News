@@ -36,7 +36,7 @@
             android:windowSoftInputMode="adjustResize">
         </activity>
 
-               <service
+        <service
             android:name="com.sina.weibo.sdk.net.DownloadService"
             android:exported="false"/>
 
@@ -67,12 +67,14 @@
         </activity>
         <activity android:name=".activity.LoginActivity">
         </activity>
-        <activity android:name=".activity.ShowWebActivity"
-                  android:theme="@style/AppTheme">
+        <activity
+            android:name=".activity.ShowWebActivity"
+            android:theme="@style/AppTheme">
         </activity>
+
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="561cae6ae0f55abd990035bf" >
+            android:value="561cae6ae0f55abd990035bf">
         </meta-data>
 
     </application>

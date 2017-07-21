@@ -1,7 +1,7 @@
 package com.example.a3559dell.headlinestoday_demo.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
+import android.os.Build;
 import android.view.View;
 import android.widget.Button;
 
@@ -12,7 +12,6 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
-import org.xutils.x;
 
 import java.util.Map;
 
@@ -29,19 +28,12 @@ public class LoginActivity extends BaseActivity{
     private UmengUtils umengUtils;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        x.view().inject(this);
-         umengUtils =  new UmengUtils(this);
-        onClick();
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         umengUtils.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
     public void onClick( ) {
          qqBtn.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -103,7 +95,7 @@ public class LoginActivity extends BaseActivity{
 
     @Override
     public void initView() {
-
+        umengUtils =  new UmengUtils(this);
     }
 
     @Override
@@ -116,4 +108,18 @@ public class LoginActivity extends BaseActivity{
 
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus && Build.VERSION.SDK_INT >= 19) {
+            View decorView = getWindow().getDecorView();
+            decorView.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+        }
+    }
 }

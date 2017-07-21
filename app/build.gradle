@@ -36,16 +36,17 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+    compile files('libs/open_sdk_r5781.jar')
+    compile 'com.android.support:design:25.3.1'
+    compile project(':drag_library')
+    compile project(':xlistview')
+    compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'org.xutils:xutils:3.5.0'
     compile 'com.android.support:design:25.3.1'
-    compile files('libs/open_sdk_r5781.jar')
-    compile 'com.android.support:design:25.3.1'
     compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
-    compile project(':drag_library')
-    compile project(':xlistview')
     compile 'io.github.openfeign:feign-gson:9.5.0'
-    compile 'com.github.bumptech.glide:glide:4.0.0-RC1'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okio:okio:1.5.0'
+    compile 'com.android.support:support-v4:25.3.1'
 }

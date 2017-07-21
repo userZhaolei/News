@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ import me.maxwin.view.XListView;
 /**
  * Created by 3559dell on 2017/7/7.
  */
-public class ContentFragment extends Fragment implements XListView.IXListViewListener{
+public class ContentFragment1 extends Fragment implements XListView.IXListViewListener{
 
     private List<MyBean.ListBean> list;
     private MyAdapter adapter;
@@ -48,8 +49,11 @@ public class ContentFragment extends Fragment implements XListView.IXListViewLis
         }
     };
     private XListView xlv;
+    public ContentFragment1() {
 
-    public ContentFragment(String path) {
+    }
+
+    public ContentFragment1(String path) {
         this.path = path;
     }
 
@@ -96,11 +100,13 @@ public class ContentFragment extends Fragment implements XListView.IXListViewLis
 
            @Override
            public void onResponse(Response response) throws IOException {
-             /*  Log.e("----------------------",response.body().string().toString()+Thread.currentThread().getName());*/
-               MyBean myBean = new Gson().fromJson(response.body().string(), MyBean.class);
-               Message msg = handler.obtainMessage();
-               msg.obj = myBean;
-               handler.sendMessage(msg);
+                     String str =response.body().string();
+                         MyBean myBean = new Gson().fromJson(str, MyBean.class);
+                         Log.e("----------------------",str+Thread.currentThread().getName());
+                         Message msg = handler.obtainMessage();
+                         msg.obj = myBean;
+                         handler.sendMessage(msg);
+
            }
        });
     }

@@ -1,31 +1,31 @@
 package com.example.a3559dell.headlinestoday_demo.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.example.a3559dell.headlinestoday_demo.R;
 
-public class ShowWebActivity extends AppCompatActivity {
+import org.xutils.view.annotation.ContentView;
+import org.xutils.view.annotation.ViewInject;
 
+@ContentView(R.layout.activity_show_web)
+public class ShowWebActivity extends BaseActivity {
+    @ViewInject(R.id.webView)
     private WebView webView;
-    private String url;
 
+    private String url;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_web);
-        initView();
-        initData();
+    public void onClick() {
 
     }
-    private void initData() {
+    @Override
+    public void initData() {
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
-
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -37,12 +37,15 @@ public class ShowWebActivity extends AppCompatActivity {
         });
         webView.loadUrl(url);
     }
+    @Override
+    public void logic() {
 
-    private void initView() {
+    }
+    @Override
+    public void initView() {
         webView = (WebView) findViewById(R.id.web_webView);
         android.support.v7.app.ActionBar supportActionBar = getSupportActionBar();
         supportActionBar.setDisplayHomeAsUpEnabled(true);
-
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -50,10 +53,23 @@ public class ShowWebActivity extends AppCompatActivity {
             case android.R.id.home:
                 finish();
                 break;
+            case 1:
+
+                break;
+            case 2:
+                Toast.makeText(ShowWebActivity.this, "瞎点这是帮你关闭的", Toast.LENGTH_SHORT).show();
+                break;
             default:
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0,1,0,"帮助");
+        menu.add(0,2,0,"关于");
+        return super.onCreateOptionsMenu(menu);
     }
 
 }

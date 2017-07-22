@@ -17,16 +17,16 @@ import android.widget.ImageView;
 
 import com.andy.library.ChannelActivity;
 import com.andy.library.ChannelBean;
-import com.bumptech.glide.Glide;
-import com.example.a3559dell.headlinestoday_demo.Adapter.ViewPagerAdapter;
 import com.example.a3559dell.headlinestoday_demo.R;
+import com.example.a3559dell.headlinestoday_demo.adapter.ViewPagerAdapter;
 import com.example.a3559dell.headlinestoday_demo.fragment.ContentFragment1;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.xutils.image.ImageOptions;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
-
+import org.xutils.x;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,9 +88,10 @@ public class MainActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
             if(resultCode==LoginActivity.RESULT_CODE){
+                ImageOptions options = new ImageOptions.Builder().setCircular(true)
+                        .build();
                 String url = data.getStringExtra("url");
-                Glide.with(MainActivity.this).load(url).into(imageleftDrawer);
-
+                x.image().bind(imageleftDrawer,url,options);
             }else if(requestCode==ChannelActivity.REQUEST_CODE){
                 String da =data.getStringExtra(ChannelActivity.RESULT_JSON_KEY);
                 sp.edit().putString(TAB_DATA_KEY,da).commit();

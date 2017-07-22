@@ -8,6 +8,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.example.a3559dell.headlinestoday_demo.R;
+import com.example.a3559dell.headlinestoday_demo.utils.DialogUtils;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -54,10 +55,10 @@ public class ShowWebActivity extends BaseActivity {
                 finish();
                 break;
             case 1:
-
+                DialogUtils.CreateDialog(ShowWebActivity.this);
                 break;
             case 2:
-                Toast.makeText(ShowWebActivity.this, "瞎点这是帮你关闭的", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ShowWebActivity.this, "嘿，这是帮你关闭的", Toast.LENGTH_SHORT).show();
                 break;
             default:
                 break;

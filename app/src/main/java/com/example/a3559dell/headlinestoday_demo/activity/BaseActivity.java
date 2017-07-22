@@ -17,12 +17,26 @@ public abstract class BaseActivity extends AppCompatActivity  {
         initData();
         onClick();
         logic();
-
     }
 
+    /**
+     * 点击事件
+     */
     public abstract void onClick();
+
+    /**
+     * 初始化控件
+     */
     public abstract void initView();
+
+    /**
+     * 初始化数据
+     */
     public abstract void initData();
+
+    /**
+     * 逻辑处理
+     */
     public abstract void logic();
 
 

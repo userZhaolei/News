@@ -12,9 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
-import com.example.a3559dell.headlinestoday_demo.Adapter.MyAdapter;
 import com.example.a3559dell.headlinestoday_demo.R;
 import com.example.a3559dell.headlinestoday_demo.activity.ShowWebActivity;
+import com.example.a3559dell.headlinestoday_demo.adapter.MyAdapter;
 import com.example.a3559dell.headlinestoday_demo.mobel.MyBean;
 import com.google.gson.Gson;
 import com.squareup.okhttp.Call;
@@ -77,10 +77,13 @@ public class ContentFragment1 extends Fragment implements XListView.IXListViewLi
         xlv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               MyBean.ListBean bean= (MyBean.ListBean) adapter.getItem(position);
-                Intent intent = new Intent(getActivity(), ShowWebActivity.class);
-                intent.putExtra("url",bean.getDocurl());
-                startActivity(intent);
+                if(position>0&&position<list.size()){
+                    MyBean.ListBean bean= (MyBean.ListBean) adapter.getItem(position-1);
+                    Intent intent = new Intent(getActivity(), ShowWebActivity.class);
+                    intent.putExtra("url",bean.getDocurl());
+                    startActivity(intent);
+                }
+
             }
         });
     }

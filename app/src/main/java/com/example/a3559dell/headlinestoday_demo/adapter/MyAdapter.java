@@ -1,4 +1,4 @@
-package com.example.a3559dell.headlinestoday_demo.Adapter;
+package com.example.a3559dell.headlinestoday_demo.adapter;
 
 
 import android.content.Context;
